@@ -1,25 +1,22 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
 import {
-  Button,
   Drawer,
-  useDisclosure,
-  DrawerOverlay,
+  DrawerClose,
   DrawerContent,
-  DrawerCloseButton,
+  DrawerDescription,
+  DrawerFooter,
   DrawerHeader,
-  DrawerBody,
-  Stack,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
+import {
   Accordion,
   AccordionItem,
-  AccordionIcon,
-  AccordionButton,
-  Text,
-  AccordionPanel,
-  Icon,
-  HStack,
-} from "@chakra-ui/react";
+  AccordionTrigger,
+  AccordionContent,
+} from "@/components/ui/accordion";
 import { BsFillArrowRightCircleFill } from "react-icons/bs";
-import { AiOutlineBars } from "react-icons/ai";
 import QueryMap from "@/app/data/queries";
 
 interface QueriesDrawerProps {
@@ -33,80 +30,72 @@ const QueriesDrawer: React.FC<QueriesDrawerProps> = ({
   displayText,
   setValue,
 }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef<HTMLButtonElement>(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const drawerCloseRef = useRef<HTMLButtonElement>(null);
 
-  const Queryonclick = (value: string) => {
+  const QueryOnclick = (value: string) => {
     usePredefinedQuery(value);
+    setIsOpen(false); // Close the drawer
   };
 
   return (
     <>
-      <Button
-        aria-label="Available Tables"
-        leftIcon={<AiOutlineBars />}
-        ref={btnRef}
-        colorScheme="teal"
-        onClick={onOpen}
-      >
-        {displayText ? "Available Tables" : ""}
-      </Button>
-      <Drawer
-        isOpen={isOpen}
-        placement="left"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-      >
-        <DrawerOverlay />
-        <DrawerContent bgColor="teal">
-          <DrawerCloseButton />
-          <DrawerHeader>Available Queries</DrawerHeader>
-
-          <DrawerBody>
-            <Stack direction="column" spacing={4}>
-              <Accordion allowToggle>
+      <Drawer open={isOpen} onOpenChange={setIsOpen}>
+        <DrawerTrigger asChild>
+          <Button aria-label="Available Tables" onClick={() => setIsOpen(true)}>
+            {displayText ? "Available Tables" : ""}
+          </Button>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div className="mx-auto w-full max-w-sm">
+            <DrawerHeader>
+              <DrawerTitle>Available Queries</DrawerTitle>
+              <DrawerDescription>Select a query to run.</DrawerDescription>
+            </DrawerHeader>
+            <div className="p-4 pb-0">
+              <Accordion type="single" collapsible>
                 {QueryMap.map((items, key) => (
-                  <AccordionItem py={2} border="none" key={key}>
-                    <h2>
-                      <AccordionButton
-                        onClick={() => {
-                          Queryonclick(items.query);
-                        }}
-                        bgColor={"blackAlpha.300"}
-                      >
-                        <HStack justifyContent={"space-between"} w={"100%"}>
-                          <Icon as={BsFillArrowRightCircleFill} />
-                          <Text fontWeight="bold">{items.tableQuery}</Text>
-                          <AccordionIcon />
-                        </HStack>
-                      </AccordionButton>
-                    </h2>
-                    {items.tableFields.map((tablefieldData, index) => (
-                      <AccordionPanel
-                        key={index}
-                        bgColor={"blackAlpha.300"}
-                        fontWeight="bold"
-                        pb={2}
-                        cursor={"pointer"}
-                        _hover={{ bg: "blackAlpha.100" }}
-                        onClick={() => {
-                          setValue(
-                            "select " +
-                              tablefieldData +
-                              " from " +
-                              items.tableQuery
-                          );
-                          onClose();
-                        }}
-                      >
-                        {tablefieldData}
-                      </AccordionPanel>
-                    ))}
+                  <AccordionItem key={key} value={items.tableQuery}>
+                    <AccordionTrigger className="flex justify-between items-center bg-blackAlpha-300 py-2 px-4">
+                      <div className="flex items-center space-x-2">
+                        <BsFillArrowRightCircleFill />
+                        <span className="font-bold">{items.tableQuery}</span>
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className="bg-blackAlpha-300">
+                      {items.tableFields.map((tablefieldData, index) => (
+                        <div
+                          key={index}
+                          className="py-2 px-4 font-bold cursor-pointer hover:bg-blackAlpha-100"
+                          onClick={() => {
+                            setValue(
+                              "select " +
+                                tablefieldData +
+                                " from " +
+                                items.tableQuery
+                            );
+                            QueryOnclick(
+                              "select " +
+                                tablefieldData +
+                                " from " +
+                                items.tableQuery
+                            );
+                          }}
+                        >
+                          {tablefieldData}
+                        </div>
+                      ))}
+                    </AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
-            </Stack>
-          </DrawerBody>
+            </div>
+            <DrawerFooter>
+              <DrawerClose asChild>
+                <Button variant="outline" ref={drawerCloseRef}>Close</Button>
+              </DrawerClose>
+            </DrawerFooter>
+          </div>
         </DrawerContent>
       </Drawer>
     </>
