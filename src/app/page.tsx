@@ -16,7 +16,6 @@ export default function Home() {
   const [history, setHistory] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isFullScreen, setIsFullScreen] = useState<boolean>(false);
-  const [horizontalSizes, setHorizontalSizes] = useState<number[]>([20, 80]);
   const [verticalSizes, setVerticalSizes] = useState<number[]>([60, 40]);
 
   useEffect(() => {
@@ -38,12 +37,7 @@ export default function Home() {
     setLoading(false);
   };
 
-  const handleHorizontalResize = (sizes: number[]) => {
-    if (!isFullScreen) {
-      setHorizontalSizes(sizes);
-    }
-  };
-
+ 
   const handleVerticalResize = (sizes: number[]) => {
     setVerticalSizes(sizes);
   };

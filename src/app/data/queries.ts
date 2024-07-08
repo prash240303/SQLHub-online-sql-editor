@@ -1,18 +1,21 @@
+// Define QueryItem interface
+interface QueryItem {
+  tableQuery: string;
+  query: string;
+  tableFields: string[];
+  data: any[];
+}
+
+// Import data
 import Customers from "./customers";
 import categories from "./categories";
 import Products from "./products";
 import Suppliers from "./suppliers";
 
-interface QueryItem {
-  tableQuery: string;
-  query: string;
-  tableFields: string[];
-  data: any[]; 
-}
-
+// Define the QueryMap array using the QueryItem interface
 const QueryMap: QueryItem[] = [
   {
-    tableQuery: "Customers",
+    tableQuery: "CUSTOMERS",
     query: "select * from CUSTOMERS",
     tableFields: [
       "customerID",
@@ -30,13 +33,13 @@ const QueryMap: QueryItem[] = [
     data: Customers,
   },
   {
-    tableQuery: "Categories",
+    tableQuery: "CATEGORIES",
     query: "select * from CATEGORIES",
     tableFields: ["categoryID", "categoryName", "description", "picture"],
     data: categories,
   },
   {
-    tableQuery: "Products",
+    tableQuery: "PRODUCTS",
     query: "select * from PRODUCTS",
     tableFields: [
       "productID",
@@ -53,7 +56,7 @@ const QueryMap: QueryItem[] = [
     data: Products,
   },
   {
-    tableQuery: "Suppliers",
+    tableQuery: "SUPPLIERS",
     query: "select * from SUPPLIERS",
     tableFields: [
       "supplierID",

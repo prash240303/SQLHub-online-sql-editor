@@ -1,6 +1,14 @@
 import React from "react";
-import { BsArrowsFullscreen, BsFullscreenExit } from "react-icons/bs";
+import { LuExpand, LuShrink } from "react-icons/lu";
 import { FaHistory } from "react-icons/fa";
+import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 interface EditorTopControlsProps {
   setTheme: (theme: string) => void;
@@ -34,15 +42,9 @@ const EditorTopControls: React.FC<EditorTopControlsProps> = ({
   };
 
   return (
-    <div className="flex justify-between text-black w-full mb-2">
-      <div className="flex items-center gap-2 justify-center">
-        <button
-          aria-label="Fullscreen"
-          onClick={handleFullScreenToggle}
-          className="p-2 bg-gray-200 w-8 text-black h-8 rounded-md hover:bg-gray-300"
-        >
-          {!isFullScreen ? <BsArrowsFullscreen /> : <BsFullscreenExit />}
-        </button>
+    <div className="flex justify-between dark:bg-gray-800 bg-white text-black w-full border-b border-neutral-300 p-3">
+      <div className="flex items-center gap-2 text-neutral-800 justify-center">
+        <span className="font-bold dark:text-white text-xl">SQL Editor </span>
         <div className="flex-grow" />
         {isFullScreen && (
           <button
@@ -54,22 +56,33 @@ const EditorTopControls: React.FC<EditorTopControlsProps> = ({
           </button>
         )}
       </div>
-      <div className="flex items-center">
-        <span className="font-bold text-white">Theme</span>
-        <select
-          aria-label="Theme options"
-          onChange={(e) => setTheme(e.currentTarget.value)}
-          className="ml-2 p-2 border border-gray-300 rounded-md"
+      <div className="flex items-center gap-3">
+        <Button
+          variant={"outline"}
+          aria-label="Fullscreen"
+          onClick={handleFullScreenToggle}
+          className="dark:text-white text-black h-10"
         >
-          <option defaultValue="sqlserver" disabled>
-            Select
-          </option>
-          {themes.map((item, key) => (
-            <option key={key} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
+          {isFullScreen ? "Shrink" : "Fullscreen"}
+          {!isFullScreen ? (
+            <LuExpand className="ml-2 size-4" />
+          ) : (
+            <LuShrink className="ml-2" />
+          )}
+        </Button>
+
+        <Select onValueChange={setTheme}>
+          <SelectTrigger className="dark:text-white text-black h-10">
+            <SelectValue placeholder="Select theme" />
+          </SelectTrigger>
+          <SelectContent>
+            {themes.map((theme, key) => (
+              <SelectItem key={key} value={theme}>
+                {theme}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );

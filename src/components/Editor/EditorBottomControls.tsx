@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
-import { Input, Button } from "@chakra-ui/react";
-// import { Button } from "../ui/button";
+import { Button } from "../ui/button";
 import QueriesDrawer from "../Queries/QueriesDrawer";
-import { AiFillCaretRight } from "react-icons/ai";
-import { BsFillFileEarmarkArrowUpFill } from "react-icons/bs";
+import { Input } from "../ui/input";
+import { PlayCircle } from "lucide-react";
 
 interface EditorBottomControlsProps {
   SubmitQuery: () => void;
@@ -20,24 +19,50 @@ const EditorBottomControls: React.FC<EditorBottomControlsProps> = ({
 }) => {
   const fileInput = useRef<HTMLInputElement | null>(null);
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      // Handle the file import logic here
+      console.log("File selected:", file);
+      // You can read the file content and process it as needed
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target?.result;
+        console.log("File content:", text);
+        // You can use setValue to set the content to your query editor
+        // setValue(text as string);
+      };
+      reader.readAsText(file);
+    }
+  };
+
   return (
-    <div className="flex flex-col md:flex-row justify-between w-full mt-2 space-y-2 md:space-y-0 md:space-x-2">
+    <div className="flex flex-col md:flex-row justify-between border-t border-neutral-300 bg-white dark:bg-gray-800 w-full p-3 space-y-2 md:space-y-0 md:space-x-2">
       <QueriesDrawer
         usePredefinedQuery={usePredefinedQuery}
         displayText={true}
         setValue={setValue}
+        variant="outline"
       />
       <div>
-        <Input hidden id="import" name="import" type="file" ref={fileInput} />
-        <Button onClick={() => fileInput.current?.click()} leftIcon={<BsFillFileEarmarkArrowUpFill />}>
-          Import
+        <Input
+          id="import"
+          name="import"
+          type="file"
+          ref={fileInput}
+          onChange={handleFileChange}
+          className="hidden"
+        />
+        <Button variant={'outline'} onClick={() => fileInput.current?.click()}>
+          Import Table
         </Button>
       </div>
-      <div className="flex flex-1 justify-end space-x-2">
-        <Button leftIcon={<AiFillCaretRight />} onClick={SubmitQuery}>
-          Run Query
+      <div className="flex flex-1 font-semibold justify-end space-x-2">
+        <Button className="bg-green-500 font-semibold text-white hover:bg-green-600" onClick={SubmitQuery}>
+          Run
+          <PlayCircle className="ml-1 h-4 w-4" />
         </Button>
-        <Button onClick={ClearQuery}>
+        <Button variant={'outline'} onClick={ClearQuery}>
           Clear
         </Button>
       </div>

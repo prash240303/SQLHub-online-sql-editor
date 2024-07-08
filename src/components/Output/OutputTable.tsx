@@ -1,15 +1,13 @@
-import {
-  Td,
-  Th,
-  Tr,
-  Box,
-  Table,
-  TableCaption,
-  Thead,
-  Tbody,
-  Text,
-} from "@chakra-ui/react";
 import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 interface OutputTableProps {
   data: Record<string, any>[];
@@ -17,37 +15,35 @@ interface OutputTableProps {
 
 const OutputTable: React.FC<OutputTableProps> = ({ data }) => {
   if (data.length === 0) {
-    return <Text>Write a query to see tabular results</Text>;
+    return <p className="text-gray-500">Write a query to see tabular results</p>;
   }
 
   const headerItems = Object.keys(data[0]);
 
   return (
-    <Box px={4} width={"100%"}>
-      <Box overflowY="auto" overflowX="auto" maxH="50vh" maxW="100%">
-        <Table variant="striped">
+    <div className="px-4 w-full h-full overflow-y-auto">
+      <div className="overflow-x-auto h-full">
+        <Table>
           <TableCaption>Resulting Query Table</TableCaption>
-          <Thead position="sticky" top={0} zIndex="docked" bgColor="teal">
-            <Tr>
+          <TableHeader>
+            <TableRow>
               {headerItems.map((item, key) => (
-                <Th fontWeight="extrabold" color="white" key={key}>
-                  {item}
-                </Th>
+                <TableHead key={key}>{item}</TableHead>
               ))}
-            </Tr>
-          </Thead>
-          <Tbody height={"50vh"} overflowY={"scroll"}>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {data.map((bodyItem, key) => (
-              <Tr key={key}>
+              <TableRow key={key}>
                 {headerItems.map((item, subKey) => (
-                  <Td key={subKey}>{bodyItem[item]}</Td>
+                  <TableCell key={subKey}>{bodyItem[item]}</TableCell>
                 ))}
-              </Tr>
+              </TableRow>
             ))}
-          </Tbody>
+          </TableBody>
         </Table>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

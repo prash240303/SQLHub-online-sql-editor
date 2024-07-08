@@ -49,7 +49,7 @@ const Editor: React.FC<EditorProps> = ({
 }) => {
   const [theme, setTheme] = useState<string>("sqlserver");
   const [width, setWidth] = useState<string>("80%");
-  const [maxLines, setMaxLines] = useState<number>(400);
+  const [maxLines, setMaxLines] = useState<number>(30);
 
   useEffect(() => {
     setMaxLines(isFullScreen ? 20 : 10);
@@ -67,7 +67,7 @@ const Editor: React.FC<EditorProps> = ({
   };
 
   return (
-    <div className={`h-full w-full space-y-4 p-3 flex items-start justify-start flex-col `}>
+    <div className={`h-full w-full  flex items-start justify-start flex-col `}>
       <EditorTopControls
         setTheme={setTheme}
         isFullScreen={isFullScreen}
@@ -83,10 +83,10 @@ const Editor: React.FC<EditorProps> = ({
         name="editor"
         showGutter
         showPrintMargin={false}
+        height="100%"
         placeholder="Write SQL query..."
         fontSize={16}
-        minLines={40}
-        maxLines={maxLines}
+        minLines={30}
         setOptions={{
           enableBasicAutocompletion: true,
           enableLiveAutocompletion: true,
