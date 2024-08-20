@@ -48,7 +48,7 @@ export default function Home() {
 
   return (
     <Provider>
-      <div className="flex flex-col h-screen bg-black bg-opacity-30">
+      <div className="flex flex-col h-screen ">
         <Navbar usePredefinedQuery={usePredefinedQuery} setValue={setValue} />
         <div className="flex-grow min-h-0 flex">
           {!isFullScreen && (

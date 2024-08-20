@@ -22,7 +22,6 @@ const EditorBottomControls: React.FC<EditorBottomControlsProps> = ({
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      // Handle the file import logic here
       console.log("File selected:", file);
       // You can read the file content and process it as needed
       const reader = new FileReader();
@@ -42,7 +41,6 @@ const EditorBottomControls: React.FC<EditorBottomControlsProps> = ({
         usePredefinedQuery={usePredefinedQuery}
         displayText={true}
         setValue={setValue}
-        variant="outline"
       />
       <div>
         <Input

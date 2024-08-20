@@ -24,14 +24,12 @@ interface QueriesDrawerProps {
   usePredefinedQuery: (value: string) => void;
   displayText: boolean;
   setValue: (value: string) => void;
-  variant: string | "solid";
 }
 
 const QueriesDrawer: React.FC<QueriesDrawerProps> = ({
   usePredefinedQuery,
   displayText,
   setValue,
-  variant
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const drawerCloseRef = useRef<HTMLButtonElement>(null);
@@ -45,7 +43,7 @@ const QueriesDrawer: React.FC<QueriesDrawerProps> = ({
     <>
       <Drawer open={isOpen} onOpenChange={setIsOpen}>
         <DrawerTrigger asChild>
-          <Button aria-label="Available Tables" className="text-black focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground " onClick={() => setIsOpen(true)}>
+          <Button aria-label="Available Tables" className="text-black dark:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground " onClick={() => setIsOpen(true)}>
             {displayText ? "Available Tables" : ""}
             {!displayText && <AlignJustify size={20} />}
           </Button>

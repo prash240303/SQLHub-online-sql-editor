@@ -21,7 +21,7 @@ const OutputTable: React.FC<OutputTableProps> = ({ data }) => {
   const headerItems = Object.keys(data[0]);
 
   return (
-    <div className="px-4 w-full h-full overflow-y-auto">
+    <div className="w-full h-full overflow-y-auto">
       <div className="overflow-x-auto h-full">
         <Table>
           <TableCaption>Resulting Query Table</TableCaption>

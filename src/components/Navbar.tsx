@@ -32,7 +32,7 @@ const Navbar: React.FC<NavbarProps> = ({ usePredefinedQuery, setValue }) => {
       </div>
 
       <div className="flex space-x-4">
-        <Link href="https://github.com/your-repo">
+        <Link href="https://github.com/prash240303/sql-editor-nextjs">
           <BsGithub size={24} />
         </Link>
 
