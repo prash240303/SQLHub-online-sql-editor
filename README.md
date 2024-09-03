@@ -1,4 +1,4 @@
-<h1 align="center">SQL Online Editor</h4>
+<h1 align="center">SQLHub-online-sql-editor</h4>
 
 <p align="center">
 <a href="https://github.com/janvi01/sql-editor/graphs/contributors" target="_blank">
