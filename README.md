@@ -44,7 +44,6 @@
 
 **SQLHub-online-sql-editor** aims to provide users with a seamless and user-friendly platform for executing SQL queries, displaying query results in a table, maintaining a query history log, and supporting the export of results in CSV formats. The application will also provide a list of themes to change the editor UI and available tables in the sidebar for easy reference.
 
-### Live : [https://sql-editor-online.vercel.app/](https://sql-editor-online.vercel.app/)
 
 ### Project Overview
 
@@ -69,12 +68,14 @@
 The following technologies and libraries are used for the development of this
 project.
 
-- [React](https://react.dev/)
+- [NextJs](https://nextjs.org/)
 - [React Ace](https://github.com/securingsincity/react-ace)
-- [Chakra UI](https://chakra-ui.com/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [ShadCN](shadcn/ui)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [React-json-to-csv](https://github.com/coston/react-json-to-csv)
 - [Prettier](https://prettier.io/)
+
 
 ## Demo Screenshots
 
@@ -84,26 +85,3 @@ project.
 
 ![Changed Theme](./src/assets/screenshots/editor3.png)
 
-## Performance
-
-(Performance using [PageSpeed Insights](https://pagespeed.web.dev/))
-
-![Pagespeed](./src/assets/screenshots/Performance1.png)
-
-(Performance using Chrome Devtools LightHouse)
-
-![Chrome Lighthouse](./src/assets/screenshots/Performance2.png)
-
-### Optimisation
-
-- Lazy loaded output display.
-- No error logs to the console.
-- Used Vercel for hosting.
-
-## Community and Contributions
-
-We warmly welcome all contributors! The Project is meant to build a community and it welcomes open collaboration. As you get started, please review this project's [contributing guidelines](https://github.com/janvi01/sql-editor/blob/main/CONTRIBUTING.md). Whether you are a user or code contributor and whether you're opening an [issue](https://github.com/janvi01/sql-editor/issues) or a [pull request](https://github.com/janvi01/sql-editor/pulls), know that any form of your engagement is considered a contribution and is appreciated. Contributors are expected to adhere to the **Code of Conduct**.
-
-### Thanks to these wonderful Contributors 🌻
-
-![Contributors](https://contrib.rocks/image?repo=janvi01/sql-editor&lastUpdate=37676)
