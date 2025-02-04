@@ -24,7 +24,6 @@ const OutputTable: React.FC<OutputTableProps> = ({ data }) => {
     <div className="w-full h-full overflow-y-auto">
       <div className="overflow-x-auto h-full">
         <Table>
-          <TableCaption>Resulting Query Table</TableCaption>
           <TableHeader>
             <TableRow>
               {headerItems.map((item, key) => (
@@ -36,7 +35,7 @@ const OutputTable: React.FC<OutputTableProps> = ({ data }) => {
             {data.map((bodyItem, key) => (
               <TableRow key={key}>
                 {headerItems.map((item, subKey) => (
-                  <TableCell key={subKey}>{bodyItem[item]}</TableCell>
+                  <TableCell key={subKey} className="text-ellipsis truncate max-w-48">{bodyItem[item]}</TableCell>
                 ))}
               </TableRow>
             ))}

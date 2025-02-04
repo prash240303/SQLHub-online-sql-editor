@@ -68,7 +68,7 @@ const QueriesDrawer: React.FC<QueriesDrawerProps> = ({
                       {item.tableFields.map((field, index) => (
                         <div
                           key={index}
-                          className="py-2 px-4 font-bold cursor-pointer rounded-md hover:bg-neutral-200"
+                          className="py-2 px-4 font-bold cursor-pointer rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-600"
                           onClick={() => {
                             const query = `select ${field} from ${item.tableQuery}`;
                             setValue(query);

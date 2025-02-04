@@ -68,7 +68,7 @@ export default function QueryHistory({
         onChange={(e) => setSearch(e.target.value)}
         className="mb-4"
       />
-      <ScrollArea className="h-[88%] pr-2 w-full rounded-md">
+      <ScrollArea className="max-h-[70vh] overflow-y-scroll no-scrollbar pr-2 w-full rounded-md">
         {filteredHistory.length > 0 ? (
           <ul className="space-y-3 w-full p-2">
             {filteredHistory.reverse().map((item, id) => (
